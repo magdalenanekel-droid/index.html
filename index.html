@@ -83,45 +83,38 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Linz Listen</title>
+  <title>User Liste</title>
 </head>
 <body>
 
   <h2>Lokale Stadtteile (Linz)</h2>
   <ul id="liste-linz"></ul>
 
-  <h2>User vom Server</h2>
+  <h2>Usernames vom Server</h2>
   <ul id="service-liste"></ul>
 
   <script>
-     =========================
-     Teil A: Lokale Daten
-     =========================
+    // Teil A: Lokale Daten
     const stadtteile = ["Urfahr", "Innere Stadt", "Bindermichel"];
     const liste = document.getElementById("liste-linz");
 
-    stadtteile.forEach(s => {
-      let li = document.createElement("li");
-      li.textContent = s;
+    stadtteile.forEach(name => {
+      const li = document.createElement("li");
+      li.textContent = name;
       liste.appendChild(li);
     });
 
-     =========================
-     Teil B: Servicecall
-     =========================
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(data => {
+    // Teil B: Serverdaten (Usernames)
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(res => res.json())
+      .then(users => {
         const sListe = document.getElementById("service-liste");
 
-        data.forEach(user => {
-          let li = document.createElement("li");
-          li.textContent = "User: " + user.name;
+        users.forEach(user => {
+          const li = document.createElement("li");
+          li.textContent = user.username;
           sListe.appendChild(li);
         });
-      })
-      .catch(error => {
-        console.error("Fehler:", error);
       });
   </script>
 
