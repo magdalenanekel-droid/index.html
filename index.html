@@ -78,6 +78,55 @@
     </ol>
   </li>
 </ul>
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Linz Listen</title>
+</head>
+<body>
+
+  <h2>Lokale Stadtteile (Linz)</h2>
+  <ul id="liste-linz"></ul>
+
+  <h2>User vom Server</h2>
+  <ul id="service-liste"></ul>
+
+  <script>
+     =========================
+     Teil A: Lokale Daten
+     =========================
+    const stadtteile = ["Urfahr", "Innere Stadt", "Bindermichel"];
+    const liste = document.getElementById("liste-linz");
+
+    stadtteile.forEach(s => {
+      let li = document.createElement("li");
+      li.textContent = s;
+      liste.appendChild(li);
+    });
+
+     =========================
+     Teil B: Servicecall
+     =========================
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(data => {
+        const sListe = document.getElementById("service-liste");
+
+        data.forEach(user => {
+          let li = document.createElement("li");
+          li.textContent = "User: " + user.name;
+          sListe.appendChild(li);
+        });
+      })
+      .catch(error => {
+        console.error("Fehler:", error);
+      });
+  </script>
+
+</body>
+</html>
     
 <a href="#top">Zurück nach oben</a> 
 </body>
